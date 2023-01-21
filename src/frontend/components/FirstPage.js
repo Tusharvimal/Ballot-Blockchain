@@ -11,7 +11,7 @@ function FirstPage(props) {
     e.preventDefault()
     let value = ""
     value = await ballot.getVoter(account)
-    console.log(value.canVote)
+    // console.log(value.canVote)
     if (!value.canVote) {
       setIsDisabled(true)
       setErrorMessage("You are not authorized to vote!")

@@ -29,14 +29,14 @@ function App() {
   // web3Handler
   const loadContracts = async (signer, account) => {
     const ballots = new ethers.Contract(BallotAddress.address, BallotAbi.abi, signer);
-    console.log(ballots);
+    // console.log(ballots);
     let copyManager;
     try {
       copyManager = await ballots.manager()
     } catch (e) {
       console.log(e.message)
     }
-    console.log('This is the copyManager', copyManager)
+    // console.log('This is the copyManager', copyManager)
     if (parseInt(copyManager) === parseInt(account)) {
       setIsManager(true)
     } else {
@@ -47,17 +47,16 @@ function App() {
     setLoading(false);
     getCandidates(ballots)
   }
-  console.log(loading);
+  // console.log(loading);
 
   const getCandidates = async (ballot) => {
-    console.log(ballot)
+    // console.log(ballot)
     let cand;
     try {
       cand = await ballot.getProposals();
     } catch (e) {
       console.log(e.message);
     }
-    console.log('this is the candidate list', cand);
     setCandidates(cand.map((i) => {
       // console.log(parseInt(i.voteCount))
       return i.name;
@@ -70,7 +69,7 @@ function App() {
       if (!isCancelled) {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
         setAccount(accounts[0])
-        console.log('getting here')
+        // console.log('getting here')
         const accountBalance = await window.ethereum.request({ method: 'eth_getBalance', params: [accounts[0], 'latest'] })
         let wei = parseInt(accountBalance)
         let balance = wei / (10 ** 18)
@@ -96,9 +95,9 @@ function App() {
     }
   }, [])
 
-  const submit = () => {
-    // console.log("button is pressed")
-  }
+  // const submit = () => {
+  // console.log("button is pressed")
+  // }
 
   return (
     <BrowserRouter>
